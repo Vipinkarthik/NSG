@@ -10,35 +10,23 @@ import Alerts from "./pages/Alert";
 import Reports from "./pages/Reports";
 import Settings from "./pages/Settings";
 
-function App() {
+export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-
         {/* Landing Page */}
         <Route path="/" element={<LandingPage />} />
 
         {/* Login Page */}
         <Route path="/login" element={<LoginPage />} />
 
-        {/* Dashboard Home */}
+        {/* Dashboard Pages */}
         <Route path="/dashboard" element={<DashboardHome />} />
-
-        {/* Video Analysis */}
         <Route path="/dashboard/videoanalysis" element={<VideoAnalysis />} />
-
-        {/* Alerts */}
         <Route path="/dashboard/alerts" element={<Alerts />} />
-
-        {/* Reports */}
         <Route path="/dashboard/reports" element={<Reports />} />
-
-        {/* Settings */}
         <Route path="/dashboard/settings" element={<Settings />} />
-
       </Routes>
     </BrowserRouter>
   );
 }
-
-export default App;
