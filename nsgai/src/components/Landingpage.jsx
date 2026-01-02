@@ -1,212 +1,251 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { 
-  ShieldAlert, 
-  Users, 
-  Car, 
-  BellRing, 
-  LayoutDashboard, 
-  Zap, 
+import {
+  Shield,
+  Activity,
+  AlertTriangle,
+  UserSearch,
+  PackageSearch,
+  Radar,
+  Cpu,
+  Lock,
   ChevronRight,
-  ShieldCheck,
-  MapPin,
-  Building2
+  Eye,
+  Layers,
+  Clock,
+  Database
 } from 'lucide-react';
 
-export default function LandingPage() {
+export default function BharatSurveillanceGrid() {
   const navigate = useNavigate();
 
-  // Animation Variants
-  const fadeInUp = {
-    initial: { opacity: 0, y: 20 },
-    animate: { opacity: 1, y: 0 },
-    transition: { duration: 0.6 }
-  };
-
-  const staggerContainer = {
-    animate: { transition: { staggerChildren: 0.1 } }
-  };
-
   return (
-    <div className="min-h-screen w-full bg-[#030303] text-white font-sans selection:bg-blue-500/30">
-      
-      {/* macOS Style Glass Header */}
-      <header className="fixed top-0 w-full z-50 px-6 py-4">
-        <nav className="max-w-7xl mx-auto flex justify-between items-center px-6 py-3 bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl shadow-2xl">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
-              <ShieldCheck size={20} />
-            </div>
-            <h1 className="text-xl font-semibold tracking-tight">NSG <span className="text-blue-500">AI</span></h1>
+    <div className="min-h-screen bg-gradient-to-br from-[#070A0F] via-[#0B0F14] to-[#070A0F] text-white font-sans">
+
+      {/* ================= TOP COMMAND BAR ================= */}
+      <nav className="sticky top-0 z-50 bg-[#0E1420]/80 backdrop-blur border-b border-white/10 px-10 py-4 flex justify-between items-center">
+        <div className="flex items-center gap-5">
+          <div className="bg-red-600 p-2.5 rounded-xl shadow-lg shadow-red-900/40">
+            <Shield size={22} />
           </div>
-          
-          <div className="hidden md:flex gap-8 text-sm font-medium text-gray-400">
-            {['Features', 'Solutions', 'About', 'Contact'].map((item) => (
-              <a key={item} href={`#${item.toLowerCase()}`} className="hover:text-white transition-colors">
-                {item}
-              </a>
-            ))}
+          <div>
+            <h1 className="font-extrabold tracking-wide text-lg">
+              BHARAT SURVEILLANCE GRID
+            </h1>
+            <p className="text-[10px] text-gray-400 uppercase tracking-[0.3em]">
+              Central Intelligence Monitoring System
+            </p>
           </div>
+        </div>
 
-          <button 
-            onClick={() => navigate('/login')}
-            className="px-5 py-2 text-sm font-medium bg-white text-black rounded-full hover:bg-gray-200 transition-all active:scale-95"
-          >
-            Login
-          </button>
-        </nav>
-      </header>
-
-      {/* Hero Section with Mesh Gradient */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
-        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-blue-600/20 blur-[120px] rounded-full"></div>
-        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-purple-600/10 blur-[120px] rounded-full"></div>
-
-        <motion.div 
-          initial="initial"
-          animate="animate"
-          variants={staggerContainer}
-          className="relative z-10 text-center max-w-4xl px-6"
+        <button
+          onClick={() => navigate('/login')}
+          className="flex items-center gap-2 bg-white text-black px-7 py-2.5 rounded-md font-bold text-sm hover:bg-gray-200 transition"
         >
-          <motion.span 
-            variants={fadeInUp}
-            className="px-4 py-1.5 rounded-full border border-blue-500/30 bg-blue-500/10 text-blue-400 text-xs font-bold uppercase tracking-widest mb-6 inline-block"
-          >
-            Next-Gen Security
-          </motion.span>
-          
-          <motion.h2 
-            variants={fadeInUp}
-            className="text-6xl md:text-7xl font-bold mb-8 tracking-tighter bg-clip-text text-transparent bg-gradient-to-b from-white to-gray-400"
-          >
-            Surveillance <br /> redefined by AI.
-          </motion.h2>
+          <Lock size={16} />
+          Authorized Login
+        </button>
+      </nav>
 
-          <motion.p 
-            variants={fadeInUp}
-            className="text-lg md:text-xl mb-10 text-gray-400 max-w-2xl mx-auto leading-relaxed"
-          >
-            Automated threat detection for bombs, weapons, and abnormal behavior. 
-            Real-time intelligence for a safer tomorrow.
-          </motion.p>
+      {/* ================= HERO / INTRO ================= */}
+      <section className="max-w-7xl mx-auto px-6 py-28">
+        <div className="grid lg:grid-cols-2 gap-20 items-center">
 
-          <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button 
-              onClick={() => navigate('/login')}
-              className="px-8 py-4 rounded-2xl text-lg font-semibold bg-blue-600 hover:bg-blue-500 shadow-[0_0_20px_rgba(37,99,235,0.4)] transition-all flex items-center justify-center gap-2 group"
-            >
-              Get Started <ChevronRight size={20} className="group-hover:translate-x-1 transition-transform" />
-            </button>
-            <button className="px-8 py-4 rounded-2xl text-lg font-semibold bg-white/5 border border-white/10 hover:bg-white/10 transition-all">
-              Watch Demo
-            </button>
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7 }}
+          >
+            <div className="inline-flex items-center gap-2 bg-red-500/10 border border-red-500/20 text-red-500 px-4 py-1.5 rounded-full text-xs font-bold mb-8">
+              <Activity size={14} />
+              NATIONAL SURVEILLANCE ACTIVE
+            </div>
+
+            <h2 className="text-6xl font-extrabold leading-tight mb-8">
+              Intelligent Surveillance
+              <br />
+              <span className="text-gray-500">
+                That Thinks Ahead
+              </span>
+            </h2>
+
+            <p className="text-lg text-gray-400 leading-relaxed mb-8 max-w-xl">
+              Bharat Surveillance Grid is a secure, AI-powered desktop platform
+              designed to continuously observe live video feeds, interpret human
+              behavior, track objects, and detect suspicious activity patterns
+              across critical environments — in real time.
+            </p>
+
+            <div className="flex gap-4">
+              <button
+                onClick={() => navigate('/login')}
+                className="bg-red-600 hover:bg-red-700 px-8 py-4 rounded-lg font-bold flex items-center gap-2 shadow-lg shadow-red-900/40"
+              >
+                Enter Command Center
+                <ChevronRight size={18} />
+              </button>
+
+              <button onClick={() => navigate('/about')}
+              className="border border-white/20 px-8 py-4 rounded-lg font-semibold text-sm hover:bg-white/5 transition">
+                System Overview
+              </button>
+            </div>
           </motion.div>
-        </motion.div>
+
+          {/* ================= HERO VISUAL ================= */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.92 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.7 }}
+            className="relative bg-[#0E1420] border border-white/10 rounded-2xl overflow-hidden shadow-2xl"
+          >
+            <div className="px-5 py-3 border-b border-white/10 text-xs text-gray-400 flex justify-between">
+              <span>LIVE FEED ANALYSIS — SECTOR 12</span>
+              <span className="text-red-500 animate-pulse">● ACTIVE</span>
+            </div>
+
+           <img
+    src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1400&q=80"
+    className="h-full w-full object-cover opacity-50 grayscale group-hover:grayscale-0 group-hover:opacity-70 transition-all duration-1000 ease-in-out scale-105 group-hover:scale-100"
+    alt="Grid Strategic Overview"
+  />
+
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="bg-black/80 backdrop-blur-md border border-white/20 rounded-xl px-8 py-5 text-center">
+                <AlertTriangle size={34} className="text-red-500 mx-auto mb-3" />
+                <p className="text-sm font-bold uppercase tracking-widest">
+                  Behavioral Anomaly Detected
+                </p>
+              </div>
+            </div>
+          </motion.div>
+        </div>
       </section>
 
-      {/* Features Grid */}
-      <section id="features" className="py-32 px-6">
-        <div className="max-w-7xl mx-auto">
-          <div className="mb-20">
-            <h3 className="text-4xl font-bold mb-4">Powerful Features</h3>
-            <p className="text-gray-400">Everything you need to secure large scale environments.</p>
-          </div>
+      {/* ================= CORE MODULES ================= */}
+      <section className="max-w-7xl mx-auto px-6 py-24">
+        <h3 className="text-3xl font-bold mb-4">
+          Core Intelligence Modules
+        </h3>
+        <p className="text-gray-500 mb-16 max-w-2xl">
+          Each module operates continuously, correlating data across cameras
+          to build a real-time intelligence picture instead of isolated alerts.
+        </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <FeatureCard 
-              icon={<ShieldAlert className="text-blue-500" />} 
-              title="Threat Detection" 
-              desc="Real-time identification of weapons, bombs, and suspicious objects." 
-            />
-            <FeatureCard 
-              icon={<Users className="text-purple-500" />} 
-              title="Crowd Monitoring" 
-              desc="Behavioral analysis to detect surges or abnormal crowd movements." 
-            />
-            <FeatureCard 
-              icon={<Car className="text-emerald-500" />} 
-              title="Vehicle Tracking" 
-              desc="ANPR and suspicious parking alerts integrated with live logs." 
-            />
-            <FeatureCard 
-              icon={<BellRing className="text-orange-500" />} 
-              title="Instant Alerts" 
-              desc="Zero-latency notifications sent directly to response teams." 
-            />
-            <FeatureCard 
-              icon={<LayoutDashboard className="text-pink-500" />} 
-              title="Smart Dashboard" 
-              desc="Mac-style intuitive interface for monitoring and analytics." 
-            />
-            <FeatureCard 
-              icon={<Zap className="text-yellow-500" />} 
-              title="Low Latency" 
-              desc="High-performance edge computing for sub-second response times." 
-            />
+        <div className="grid md:grid-cols-3 gap-8">
+          <ModuleCard
+            icon={<UserSearch className="text-blue-400" />}
+            title="Person Identification & Tracking"
+            desc="Detects individuals, assigns unique identities, and continuously tracks movement across multiple camera zones without manual intervention."
+          />
+
+          <ModuleCard
+            icon={<PackageSearch className="text-yellow-400" />}
+            title="Unattended Object Intelligence"
+            desc="Monitors object placement, dwell time, and owner association. Objects left beyond acceptable thresholds are escalated automatically."
+          />
+
+          <ModuleCard
+            icon={<Radar className="text-red-400" />}
+            title="Threat Priority Engine"
+            desc="Analyzes behavior sequences and assigns threat levels, ensuring high-risk entities receive maximum system focus."
+          />
+        </div>
+      </section>
+
+      {/* ================= HOW IT WORKS ================= */}
+      <section className="bg-[#0E1420] border-t border-white/10 border-b border-white/10">
+        <div className="max-w-7xl mx-auto px-6 py-24">
+          <h3 className="text-3xl font-bold mb-16">
+            Surveillance Intelligence Workflow
+          </h3>
+
+          <div className="grid md:grid-cols-4 gap-8">
+            <StepCard icon={<Eye />} title="Observe" desc="Live video streams are continuously ingested and analyzed frame by frame." />
+            <StepCard icon={<Layers />} title="Understand" desc="AI models interpret movement, behavior, and object interactions." />
+            <StepCard icon={<Clock />} title="Correlate" desc="Events are linked over time to detect suspicious sequences." />
+            <StepCard icon={<AlertTriangle />} title="Respond" desc="Threats are classified, logged, and escalated instantly." />
           </div>
         </div>
       </section>
 
-      {/* Solutions (Apple-style Large Cards) */}
-      <section id="solutions" className="py-32 px-6 bg-white/[0.02]">
-        <div className="max-w-7xl mx-auto">
-          <h3 className="text-4xl font-bold text-center mb-20 tracking-tight">Scalable Solutions</h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <SolutionCard title="Airports" icon={<MapPin size={40}/>} img="https://images.unsplash.com/photo-1530521954074-e64f6810b32d?auto=format&fit=crop&w=800&q=80" />
-            <SolutionCard title="Malls" icon={<Building2 size={40}/>} img="https://images.unsplash.com/photo-1567449303078-57ad995bd17a?auto=format&fit=crop&w=800&q=80" />
-            <SolutionCard title="Defense" icon={<ShieldCheck size={40}/>} img="https://images.unsplash.com/photo-1508614589041-895b88991e3e?auto=format&fit=crop&w=800&q=80" />
+      {/* ================= DATA & AUDIT ================= */}
+      <section className="max-w-7xl mx-auto px-6 py-24">
+        <div className="grid lg:grid-cols-2 gap-16 items-center">
+          <div>
+            <h3 className="text-3xl font-bold mb-6">
+              Evidence-Driven Intelligence
+            </h3>
+            <p className="text-gray-400 leading-relaxed mb-6">
+              Every detection, alert, and decision is time-stamped and preserved.
+              The system builds a complete digital trail that supports review,
+              audit, and investigation workflows.
+            </p>
+
+            <ul className="space-y-3 text-gray-400 text-sm">
+              <li>• Event timelines with frame-level precision</li>
+              <li>• Automatic suspect prioritization logs</li>
+              <li>• Object-person association records</li>
+              <li>• Secure, tamper-resistant storage</li>
+            </ul>
+          </div>
+
+          <div className="bg-[#0E1420] border border-white/10 rounded-2xl p-10">
+            <Database className="text-green-400 mb-4" size={28} />
+            <h4 className="font-bold text-lg mb-2">Central Intelligence Archive</h4>
+            <p className="text-gray-400 text-sm">
+              All surveillance intelligence is preserved in a structured,
+              query-ready format to support long-term analysis and pattern discovery.
+            </p>
           </div>
         </div>
       </section>
 
-      {/* Contact Section */}
-      <section id="contact" className="py-32 px-6">
-        <div className="max-w-xl mx-auto p-10 bg-gradient-to-b from-gray-900 to-black rounded-[2.5rem] border border-white/10 shadow-2xl">
-          <h3 className="text-3xl font-bold text-center mb-8">Secure your perimeter</h3>
-          <div className="space-y-4">
-            <input type="text" placeholder="Full Name" className="w-full p-4 rounded-2xl bg-white/5 border border-white/10 focus:border-blue-500 outline-none transition-all" />
-            <input type="email" placeholder="Work Email" className="w-full p-4 rounded-2xl bg-white/5 border border-white/10 focus:border-blue-500 outline-none transition-all" />
-            <textarea placeholder="Tell us about your needs..." className="w-full p-4 rounded-2xl bg-white/5 border border-white/10 focus:border-blue-500 outline-none h-32 transition-all"></textarea>
-            <button className="w-full py-4 bg-white text-black hover:bg-gray-200 rounded-2xl font-bold transition-all active:scale-[0.98]">
-              Send Inquiry
-            </button>
+      {/* ================= FOOTER ================= */}
+      <footer className="bg-[#05080D] border-t border-white/10 py-12">
+        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+          <div className="flex items-center gap-3 opacity-60">
+            <Cpu size={18} />
+            <span className="text-xs">
+              Bharat Surveillance Grid — Secure Desktop Intelligence Platform
+            </span>
           </div>
-        </div>
-      </section>
 
-      <footer className="py-12 text-center text-gray-500 text-sm border-t border-white/5">
-        © 2026 NSG Automated Surveillance • Privacy Policy • Terms
+          <p className="text-[10px] uppercase tracking-widest text-gray-600 text-center">
+            Restricted Access • Continuous Monitoring • Audit Enabled
+          </p>
+        </div>
       </footer>
     </div>
   );
 }
 
-// Sub-components for cleaner code
-function FeatureCard({ icon, title, desc }) {
+/* ================= REUSABLE COMPONENTS ================= */
+
+function ModuleCard({ icon, title, desc }) {
   return (
-    <motion.div 
-      whileHover={{ y: -5 }}
-      className="p-8 bg-white/5 border border-white/10 rounded-[2rem] hover:bg-white/[0.08] transition-all group"
+    <motion.div
+      whileHover={{ y: -8 }}
+      transition={{ duration: 0.3 }}
+      className="bg-[#0E1420] border border-white/10 rounded-2xl p-10 shadow-xl"
     >
-      <div className="mb-6 p-3 bg-white/5 w-fit rounded-2xl group-hover:scale-110 transition-transform">
-        {icon}
-      </div>
-      <h4 className="text-xl font-semibold mb-3">{title}</h4>
-      <p className="text-gray-400 leading-relaxed text-sm">{desc}</p>
+      <div className="mb-6">{icon}</div>
+      <h4 className="text-xl font-bold mb-3">{title}</h4>
+      <p className="text-gray-400 text-sm leading-relaxed">{desc}</p>
     </motion.div>
   );
 }
 
-function SolutionCard({ title, img, icon }) {
+function StepCard({ icon, title, desc }) {
   return (
-    <div className="relative h-[400px] rounded-[2.5rem] overflow-hidden group">
-      <img src={img} alt={title} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"></div>
-      <div className="absolute bottom-8 left-8">
-        <div className="text-blue-400 mb-2">{icon}</div>
-        <h4 className="text-2xl font-bold">{title}</h4>
-      </div>
-    </div>
+    <motion.div
+      whileHover={{ scale: 1.05 }}
+      className="bg-[#0B0F14] border border-white/10 rounded-xl p-8 text-center"
+    >
+      <div className="flex justify-center mb-4 text-red-500">{icon}</div>
+      <h4 className="font-bold mb-2">{title}</h4>
+      <p className="text-sm text-gray-400">{desc}</p>
+    </motion.div>
   );
 }
