@@ -22,8 +22,44 @@ import {
 
 export default function BSG_Dashboard() {
   const [currentTime, setCurrentTime] = useState(new Date());
+  const [stats, setStats] = useState({
+    cam1: { suspects: 0, weapons: 0, bags: 0 },
+    cam2: { suspects: 0, weapons: 0, bags: 0 },
+    totalAlerts: 0
+  });
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const location = useLocation();
+
+  // Load initial stats only (no polling)
+  useEffect(() => {
+    const fetchStats = async () => {
+      try {
+        const [res1, res2] = await Promise.all([
+          fetch('/api/detection/latest?camera_id=1').catch(() => null),
+          fetch('/api/detection/latest?camera_id=2').catch(() => null)
+        ]);
+        
+        let data1 = { persons_count: 0, weapons_count: 0, bags_count: 0 };
+        let data2 = { persons_count: 0, weapons_count: 0, bags_count: 0 };
+        
+        if (res1?.ok) data1 = await res1.json();
+        if (res2?.ok) data2 = await res2.json();
+        
+        setStats({
+          cam1: { suspects: data1.persons_count || 0, weapons: data1.weapons_count || 0, bags: data1.bags_count || 0 },
+          cam2: { suspects: data2.persons_count || 0, weapons: data2.weapons_count || 0, bags: data2.bags_count || 0 },
+          totalAlerts: 0
+        });
+      } catch (err) {
+        console.warn('Stats unavailable - configure AI Service');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchStats();
+  }, []);
 
   useEffect(() => {
     const timer = setInterval(() => setCurrentTime(new Date()), 1000);
@@ -103,10 +139,10 @@ export default function BSG_Dashboard() {
 
           {/* TELEMETRY SECTION */}
           <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-            <TelemetryCard label="Global Feeds" value="1,284" icon={<Globe size={16} />} trend="+12" color="blue" />
-            <TelemetryCard label="AI Accuracy" value="99.8%" icon={<Cpu size={16} />} trend="Stable" color="purple" />
-            <TelemetryCard label="Threat Events" value="04" icon={<AlertTriangle size={16} />} trend="High" color="red" />
-            <TelemetryCard label="Active Nodes" value="24" icon={<Server size={16} />} trend="Live" color="green" />
+            <TelemetryCard label="CAM-1 Suspects" value={stats.cam1.suspects} icon={<Globe size={16} />} trend={stats.cam1.suspects > 0 ? "⚠️" : "✓"} color={stats.cam1.suspects > 0 ? "red" : "green"} />
+            <TelemetryCard label="CAM-1 Weapons" value={stats.cam1.weapons} icon={<Zap size={16} />} trend={stats.cam1.weapons > 0 ? "ALERT" : "Clear"} color={stats.cam1.weapons > 0 ? "red" : "green"} />
+            <TelemetryCard label="CAM-2 Suspects" value={stats.cam2.suspects} icon={<Globe size={16} />} trend={stats.cam2.suspects > 0 ? "⚠️" : "✓"} color={stats.cam2.suspects > 0 ? "red" : "green"} />
+            <TelemetryCard label="CAM-2 Weapons" value={stats.cam2.weapons} icon={<Zap size={16} />} trend={stats.cam2.weapons > 0 ? "ALERT" : "Clear"} color={stats.cam2.weapons > 0 ? "red" : "green"} />
           </section>
 
           {/* DYNAMIC DASHBOARD CONTENT */}

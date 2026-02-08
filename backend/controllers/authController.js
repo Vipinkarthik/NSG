@@ -6,19 +6,24 @@ import { generateToken } from "../utils/token.js";
 export const login = async (req, res) => {
   try {
     const { operatorId, password } = req.body;
+    console.log(`📍 LOGIN ATTEMPT - operatorId: ${operatorId}`);
 
     if (!operatorId || !password) {
+      console.log("❌ Missing credentials");
       return res.status(400).json({ message: "Missing credentials" });
     }
 
     const user = await User.findOne({ operatorId });
+    console.log(`🔍 User found: ${user ? "Yes" : "No"}`, user ? `(isActive: ${user.isActive})` : "");
 
     if (!user || !user.isActive) {
       return res.status(401).json({ message: "Access denied" });
     }
 
     const valid = await comparePassword(password, user.password);
+    console.log(`🔐 Password valid: ${valid}`);
     if (!valid) {
+      console.log("❌ Invalid password");
       return res.status(401).json({ message: "Invalid credentials" });
     }
 
@@ -26,14 +31,22 @@ export const login = async (req, res) => {
       id: user._id,
       operatorId: user.operatorId
     });
+    console.log("✅ Token generated successfully");
 
-    res.status(200).json({
+    const response = {
       token,
-      operatorId: user.operatorId
-    });
+      user: {
+        id: user._id,
+        operatorId: user.operatorId,
+        isActive: user.isActive
+      }
+    };
+    console.log("✅ LOGIN SUCCESS - Sending response:", { token: "***", user: response.user });
+    res.status(200).json(response);
   } catch (err) {
-    console.error("LOGIN ERROR:", err.message);
-    res.status(500).json({ message: "Login failed" });
+    console.error("❌ LOGIN ERROR:", err.message);
+    console.error("Stack:", err.stack);
+    res.status(500).json({ message: `Login failed: ${err.message}` });
   }
 };
 

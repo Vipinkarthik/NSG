@@ -17,21 +17,25 @@ export default function LoginPage() {
     setLoading(true);
 
     try {
+      console.log("🔐 Attempting login with:", { operatorId, password: "***" });
       const res = await axios.post(
-        "http://localhost:5000/api/auth/login",
+        "http://localhost:5001/api/auth/login",
         {
           operatorId,
           password,
         }
       );
+      console.log("✅ Login successful:", res.data);
 
       localStorage.setItem("nsg_token", res.data.token);
       localStorage.setItem("nsg_user", JSON.stringify(res.data.user));
 
       navigate("/dashboard");
     } catch (err) {
+      console.error("❌ Login error:", err);
+      console.error("Response:", err.response?.data);
       setError(
-        err.response?.data?.message || "Authentication failed"
+        err.response?.data?.message || err.message || "Authentication failed"
       );
     } finally {
       setLoading(false);
